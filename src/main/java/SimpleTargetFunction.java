@@ -15,5 +15,14 @@ public class SimpleTargetFunction implements TargetFunction{
         sum = 4 * sum/features.length;
         return sum;
     }
+    
+    public double evaluateRelevance(double [] features, double coeff[]){
+        double sum = 0.0;
+        for(int i=0; i<features.length; i++){
+            sum += coeff[i] * features[i];
+        }
+        sum = 4 * sum/features.length;
+        return sum;
+    }
 
 }

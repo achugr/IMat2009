@@ -1,12 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Artemij Chugreev
@@ -16,22 +10,26 @@ import java.util.regex.Pattern;
  * skype: achugr
  */
 public class Query {
-    private double[] features = new double[256];
+    private static final int FEATURES_NUMBER = 256;
+    private double[] features = new double[FEATURES_NUMBER];
     private double relevance;
     private double machineRelevance;
     private int id;
     private static int counter = 0;
+//    private static final double [] coefficients;
 
-    public Query(double[] features, int relevance) {
-        this.features = features;
-        this.relevance = relevance;
+//    public Query(double[] features, int relevance) {
+//        this.features = features;
+//        this.relevance = relevance;
+//    }
+
+    public Query(Scanner scanner) {
+        features = getFeatures(scanner);
+//        this.coefficients = coefficients;
+//        printWriter.println(evaluateRelevance(coefficients));
     }
 
-    public Query(Scanner scanner, PrintWriter printWriter) {
-        parseQueryByScanner(scanner, printWriter);
-    }
-
-    private void parseQueryByScanner(Scanner scanner, PrintWriter printWriter) {
+    private double [] getFeatures(Scanner scanner) {
         if (scanner.hasNextLine()) {
             String s = scanner.nextLine();
             StringTokenizer tokenizer = new StringTokenizer(s.substring(0, s.indexOf('#')), ": ", false);
@@ -42,12 +40,16 @@ public class Query {
                 features[j] = val;
             }
         }
-        SimpleTargetFunction simpleTargetFunction = new SimpleTargetFunction();
-        machineRelevance = simpleTargetFunction.evaluateRelevance(features);
-        System.out.println(machineRelevance);
-        printWriter.println(machineRelevance);
+        return features;    
     }
-
+    
+    public double evaluateRelevance(double [] coefficients){
+        SimpleTargetFunction simpleTargetFunction = new SimpleTargetFunction();
+        machineRelevance = simpleTargetFunction.evaluateRelevance(features, coefficients);
+//        System.out.println(machineRelevance);
+        return machineRelevance;
+    }
+    
     public int getCounter() {
         return counter;
     }
