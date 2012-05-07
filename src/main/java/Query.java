@@ -35,7 +35,7 @@ public class Query {
             StringTokenizer tokenizer = new StringTokenizer(s.substring(0, s.indexOf('#')), ": ", false);
             relevance = Double.parseDouble(tokenizer.nextToken());
             while (tokenizer.hasMoreTokens()) {
-                Integer j = Integer.parseInt((String) tokenizer.nextElement());
+                int j = Integer.parseInt((String) tokenizer.nextElement());
                 double val = Double.parseDouble((String) tokenizer.nextElement());
                 features[j] = val;
             }
