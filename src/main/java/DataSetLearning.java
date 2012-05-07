@@ -17,8 +17,8 @@ public class DataSetLearning {
     private static final int FEATURES_NUMBER = 256;
     private Query [] queries = new Query[LINES_NUMBER];
     private double [] coefficients = new double[FEATURES_NUMBER];
-    private static final int ITERATIONS_NUMBER = 20000;
-    private static final double STEP=0.5;
+    private static final int ITERATIONS_NUMBER = 100000;
+    private static final double STEP=0.01;
 
     public DataSetLearning(String filePath) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(filePath));
@@ -31,20 +31,20 @@ public class DataSetLearning {
         int featureIndex;
         double prevCoefficient;
         double machineRelevance;
-        double relevanceSummDiff=0;
+//        double relevanceSummDiff=0;
         double [] relevanceDiff = new double[ITERATIONS_NUMBER];
+        Random random = new Random();
         for(int i=0; i<ITERATIONS_NUMBER; i++){
-            relevanceSummDiff = 0;
-            Random random = new Random();
+//            relevanceSummDiff = 0;
             featureIndex = Math.abs(random.nextInt() % FEATURES_NUMBER);
             prevCoefficient = coefficients[featureIndex];
-            coefficients[featureIndex] += random.nextDouble()%(STEP*500/ITERATIONS_NUMBER);
+            coefficients[featureIndex] += random.nextDouble()%(STEP);
             for (Query query : queries) {
                 machineRelevance = query.evaluateRelevance(coefficients);
 //                System.out.println("machine rel: " + machineRelevance + "real rel: "+query.getRelevance());
-                relevanceSummDiff += Math.abs(machineRelevance-query.getRelevance());
+//                relevanceSummDiff += Math.abs(machineRelevance-query.getRelevance());
             }
-            relevanceDiff[i] = relevanceSummDiff;
+//            relevanceDiff[i] = relevanceSummDiff;
             prevMse = currMse;
             currMse = evaluateMse();
             System.out.println("prev mse: " + prevMse + "curr mse: " + currMse);
@@ -54,7 +54,7 @@ public class DataSetLearning {
             bestMse = Math.min(currMse, prevMse);
         }
         System.out.println(Arrays.toString(coefficients));
-        System.out.println(Arrays.toString(relevanceDiff));
+//        System.out.println(Arrays.toString(relevanceDiff));
         System.out.println("best mse: " + bestMse);
     }
 
