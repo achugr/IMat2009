@@ -24,7 +24,7 @@ public class Imat {
             double MSE = 0;
             for (int i = 0; i < LEARN_SET_SIZE; i++) {
                 double request = 0;
-                for (int j = 1; j <= FEATURES_NUMBER; j++) {
+                for (int j = 1; j < FEATURES_NUMBER; j++) {
                     request += weight[j - 1] * learn[i][j];
                     //    request += weight[j - 1 + 245] * learn[i][j] * learn[i][j];
                 }
@@ -38,7 +38,7 @@ public class Imat {
             double MSE = 0;
             for (int i = 0; i < LEARN_SET_SIZE; i++) {
                 double request = 0;
-                for (int j = 1; j <= FEATURES_NUMBER; j++) {
+                for (int j = 1; j < FEATURES_NUMBER; j++) {
                     if (j != index) {
                         request += weight[j - 1] * learn[i][j];
                         //   request += weight[j - 1 + 245] * learn[i][j] * learn[i][j];
