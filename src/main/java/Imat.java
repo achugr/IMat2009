@@ -177,7 +177,7 @@ public class Imat {
                 i += 1;
             }
 
-            in = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\dimarch\\Desktop\\HW2\\src\\output")));
+            in = new BufferedReader(new InputStreamReader(new FileInputStream("output")));
             int jj = 0;
             String ss = in.readLine();
             StringTokenizer tokenz = new StringTokenizer(ss, " ", false);
