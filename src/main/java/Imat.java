@@ -13,7 +13,7 @@ public class Imat {
 
     static double learn[][];
     private static final int LEARN_SET_SIZE = 97290;
-    private static final int FEATURES_NUMBER = 245;
+    private static final int FEATURES_NUMBER = 246;
 
     public static class F {
         double weight[];
@@ -51,8 +51,8 @@ public class Imat {
 
         double gradient(int index) {
             double gradient = 0;
-            for (int i = 0; i < LEARN_SET_SIZE; i++) {
-                if (index < FEATURES_NUMBER) {
+            for (int i = 0; i < LEARN_SET_SIZE - 1; i++) {
+                if (index < FEATURES_NUMBER - 1) {
                     gradient += (partSum[i] - learn[i][0]) * learn[i][index + 1];
                 } else {
                     gradient += (partSum[i] - learn[i][0]) * learn[i][index - FEATURES_NUMBER + 1] * learn[i][index - FEATURES_NUMBER + 1];
@@ -148,8 +148,11 @@ public class Imat {
     }
 
     public static void main(String[] args) {
-
+        long heapMaxSize = Runtime.getRuntime().maxMemory();
+        System.out.println(heapMaxSize);
         learn = new double[LEARN_SET_SIZE][FEATURES_NUMBER];
+        System.out.println(Runtime.getRuntime().freeMemory());
+
         for (int i = 0; i < LEARN_SET_SIZE; i++) {
             for (int j = 0; j < FEATURES_NUMBER; j++) {
                 learn[i][j] = 0;
@@ -181,7 +184,7 @@ public class Imat {
             int jj = 0;
             String ss = in.readLine();
             StringTokenizer tokenz = new StringTokenizer(ss, " ", false);
-            while (jj < FEATURES_NUMBER) {
+            while (jj < FEATURES_NUMBER && tokenz.hasMoreTokens()) {
                 ww[jj] = Double.parseDouble((String) tokenz.nextElement());
                 // ww[jj] = Math.random() / 100;
                 // ww[jj+245] = 0.0;
