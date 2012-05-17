@@ -184,7 +184,7 @@ public class Imat {
             int jj = 0;
             String ss = in.readLine();
             StringTokenizer tokenz = new StringTokenizer(ss, " ", false);
-            while (jj < FEATURES_NUMBER && tokenz.hasMoreTokens()) {
+            while (jj < FEATURES_NUMBER && tokenz.hasMoreElements()) {
                 ww[jj] = Double.parseDouble((String) tokenz.nextElement());
                 // ww[jj] = Math.random() / 100;
                 // ww[jj+245] = 0.0;
