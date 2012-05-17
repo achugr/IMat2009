@@ -141,7 +141,7 @@ public class OutputYandexMath {
             int i = 0;
             String s = in.readLine();
             StringTokenizer tokenizer = new StringTokenizer(s, " ", false);
-            while (i < 490) {
+            while (i < 490 && tokenizer.hasMoreElements()) {
                 w[i] = Double.parseDouble((String) tokenizer.nextElement());
                 i += 1;
             }
